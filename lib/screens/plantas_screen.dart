@@ -12,8 +12,15 @@ class _PlantasScreenState extends State<PlantasScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(64, 75, 96, .9),
-        title: Text("Plantas medicinais"),
+        backgroundColor: Color(0xFF79d479),
+        title: Text(
+          "Plantas medicinais",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 23,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: FutureBuilder<List<PlantaModel>>(
         future: PlantasRepository().findAllAsync(),
@@ -49,70 +56,74 @@ class _PlantasScreenState extends State<PlantasScreen> {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: Color.fromRGBO(64, 75, 96, .9),
+          color: Color(0xFF79d479),
         ),
-        child: ListTile(
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
-            decoration: new BoxDecoration(
-              border: new Border(
-                right: new BorderSide(
-                  width: 1.0,
-                  color: Colors.white24,
-                ),
-              ),
-            ),
-            child: Icon(
-              Icons.autorenew,
-              color: Colors.white,
-            ),
-          ),
-          title: Text(
-            planta.nome,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Row(
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: Container(
-                  child: LinearProgressIndicator(
-                    backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-                    value: planta.percentualEstoque,
-                    valueColor: AlwaysStoppedAnimation(Colors.green),
+        child: Padding(
+          padding: const EdgeInsets.all(7.5),
+          child: ListTile(
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+            leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: new BoxDecoration(
+                border: new Border(
+                  right: new BorderSide(
+                    width: 1.0,
+                    color: Colors.white24,
                   ),
                 ),
               ),
-              Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    'Estoque ' + planta.estoque,
-                    style: TextStyle(color: Colors.white),
+              child: Icon(
+                Icons.autorenew,
+                color: Colors.white,
+              ),
+            ),
+            title: Text(
+              planta.nome,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            subtitle: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    child: LinearProgressIndicator(
+                      backgroundColor: Colors.white,
+                      value: planta.percentualEstoque,
+                      valueColor: AlwaysStoppedAnimation(Color(0xFF00bf00)),
+                    ),
                   ),
                 ),
-              )
-            ],
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10.0),
+                    child: Text(
+                      'Estoque ' + planta.estoque,
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
+              ],
+            ),
+            trailing: Icon(
+              Icons.keyboard_arrow_right,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            onTap: () async {
+              var mensagemRetorno = await Navigator.pushNamed(
+                context,
+                '/plantas_detalhes',
+                arguments: planta,
+              );
+              print('Mensagem de retorno: ${mensagemRetorno}');
+            },
           ),
-          trailing: Icon(
-            Icons.keyboard_arrow_right,
-            color: Colors.white,
-            size: 30.0,
-          ),
-          onTap: () async {
-            var mensagemRetorno = await Navigator.pushNamed(
-              context,
-              '/plantas_detalhes',
-              arguments: planta,
-            );
-            print('Mensagem de retorno: ${mensagemRetorno}');
-          },
         ),
       ),
     );
