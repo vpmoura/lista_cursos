@@ -13,7 +13,7 @@ class _PlantasScreenState extends State<PlantasScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(64, 75, 96, .9),
-        title: Text("Cursos"),
+        title: Text("Plantas medicinais"),
       ),
       body: FutureBuilder<List<PlantaModel>>(
         future: PlantasRepository().findAllAsync(),
@@ -83,7 +83,7 @@ class _PlantasScreenState extends State<PlantasScreen> {
                 child: Container(
                   child: LinearProgressIndicator(
                     backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-                    value: planta.percentualConclusao,
+                    value: planta.percentualEstoque,
                     valueColor: AlwaysStoppedAnimation(Colors.green),
                   ),
                 ),
@@ -93,7 +93,7 @@ class _PlantasScreenState extends State<PlantasScreen> {
                 child: Padding(
                   padding: EdgeInsets.only(left: 10.0),
                   child: Text(
-                    planta.nivel,
+                    'Estoque ' + planta.estoque,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -105,12 +105,13 @@ class _PlantasScreenState extends State<PlantasScreen> {
             color: Colors.white,
             size: 30.0,
           ),
-          onTap: () {
-            Navigator.pushNamed(
+          onTap: () async {
+            var mensagemRetorno = await Navigator.pushNamed(
               context,
               '/plantas_detalhes',
               arguments: planta,
             );
+            print('Mensagem de retorno: ${mensagemRetorno}');
           },
         ),
       ),

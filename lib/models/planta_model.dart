@@ -1,17 +1,19 @@
 class PlantaModel {
   int id;
   String nome;
-  String nivel;
-  double percentualConclusao;
-  int preco;
+  String estoque;
+  double percentualEstoque;
+  String preco;
   String conteudo;
+  String nomeBinomial;
 
   PlantaModel({
     this.id,
     this.nome,
-    this.nivel,
-    this.percentualConclusao,
+    this.estoque,
+    this.percentualEstoque,
     this.preco,
     this.conteudo,
+    this.nomeBinomial,
   });
 }

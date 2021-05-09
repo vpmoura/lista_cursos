@@ -14,35 +14,37 @@ class PlantasDetalhesScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            labelValue('ID'),
-            fieldValue(plantaModel.id.toString()),
-            espaco(),
-            labelValue('Nível'),
-            fieldValue('Básico'),
-            espaco(),
-            labelValue('Preço'),
-            fieldValue(plantaModel.preco.toString()),
-            espaco(),
-            labelValue('% Conclusão'),
-            fieldValue('20%'),
-            espaco(),
-            labelValue('Conteúdo'),
-            fieldValue(
-                'Lorem ipsum dolor sit amet. Commodo blandit. Morbi commodo sed ante eu eleifend. Aliquam erat volutpat. Nam ullamcorper diam lectus, a dictum tellus pellentesque a. Nam velit ligula, porttitor ac dictum nec, commodo quis ante. Pellentesque luctus libero nulla, eu tristique erat iaculis eu.'),
-            espaco(),
-            Center(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Tenho interesse!'),
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromRGBO(64, 75, 96, .9),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              labelValue('Nome binomial'),
+              fieldValue(plantaModel.nomeBinomial),
+              espaco(),
+              labelValue('Estoque'),
+              fieldValue(plantaModel.estoque),
+              espaco(),
+              labelValue('Preço(kg)'),
+              fieldValue(plantaModel.preco),
+              espaco(),
+              labelValue('Descrição'),
+              fieldValue(plantaModel.conteudo),
+              espaco(),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    var mensagem =
+                        'Interesse na planta ${plantaModel.nome} registrado com sucesso';
+                    Navigator.pop(context, mensagem);
+                  },
+                  child: Text('Tenho interesse!'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromRGBO(64, 75, 96, .9),
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
